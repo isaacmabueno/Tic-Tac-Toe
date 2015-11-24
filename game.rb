@@ -9,11 +9,11 @@ class Game
   def start_game
     puts "Welcome to my Tic Tac Toe game"
     puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
-    puts "Please select your spot."
     puts "Type 1 to make the first move, 2 to go second"
     first_move
     until game_is_over(@board) || tie(@board)
       if @turn == true
+          puts "please select your spot"
           get_human_spot
       else
           eval_board
@@ -21,6 +21,7 @@ class Game
       end
       if !game_is_over(@board) && !tie(@board)
         if @turn == false
+            puts "please select your spot"
             get_human_spot
         else
             eval_board
@@ -49,8 +50,15 @@ class Game
   def get_human_spot
     spot = nil
     until spot
-      spot = gets.chomp.to_i
-      if @board[spot] != "X" && @board[spot] != "O"
+      spot = gets.chomp
+      if !@board.include? spot
+         spot = nil
+         puts "Please enter valid input to make a move"
+         next
+      else
+          spot = spot.to_i
+      end
+      if @board[spot] != "X" && @board[spot] != "O" && @board[spot] != nil
         @board[spot] = @hum
       else
         spot = nil
