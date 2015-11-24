@@ -20,7 +20,6 @@ class Game
           get_human_spot
       else
           eval_board
-          puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
       end
       if !game_is_over(@board) && !tie(@board)
         if @turn == false
@@ -32,7 +31,7 @@ class Game
         end
       end
     end
-    puts "Game over"
+    puts "Game over!"
   end
   def pick_marker
       input = nil
