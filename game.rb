@@ -1,6 +1,7 @@
 class Game
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    @corner_turn = false
     @com = "X"
     @hum = "O"
     @turn = nil
@@ -13,9 +14,11 @@ class Game
     pick_marker
     puts "Type 1 to make the first move, 2 to go second"
     first_move
-    puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
+
     until game_is_over(@board) || tie(@board)
       if @turn == true
+
+          puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
           puts "please select your spot"
           get_human_spot
       else
@@ -23,15 +26,21 @@ class Game
       end
       if !game_is_over(@board) && !tie(@board)
         if @turn == false
+            puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
+
             puts "please select your spot"
             get_human_spot
         else
             eval_board
-            puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
         end
       end
     end
-    puts "Game over!"
+    if game_is_over(@board)
+      puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
+      puts "Game Over!"
+    elsif tie(@board)
+      puts "It's a draw!"
+    end
   end
   def pick_marker
       input = nil
@@ -87,7 +96,7 @@ class Game
   def eval_board
     spot = nil
     until spot
-      if @board[4] == "4"
+    if @board[4] == "4"
         spot = 4
         @board[spot] = @com
       else
@@ -99,33 +108,51 @@ class Game
         end
       end
     end
+    puts "the computer placed on " + spot.to_s
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
-    available_spaces = []
-    best_move = nil
-    board.each do |s|
-      if s != "X" && s != "O"
-        available_spaces << s
-      end
-    end
-    available_spaces.each do |as|
-      board[as.to_i] = @com
-      if game_is_over(board)
-        best_move = as.to_i
-        board[as.to_i] = as
-        return best_move
-      else
-        board[as.to_i] = @hum
-        if game_is_over(board)
-          best_move = as.to_i
-          board[as.to_i] = as
-          return best_move
-        else
-          board[as.to_i] = as
+
+    if @corner_turn == false
+        available_spaces = []
+        best_move = nil
+        board.each do |s|
+          if s != "X" && s != "O"
+              if ["0", "2", "6", "8"].include? s
+                available_spaces << s
+              end
+          end
         end
-      end
+        @corner_turn = true
+        n = rand(0..available_spaces.count)
+        return available_spaces[n].to_i
+    else
+        available_spaces = []
+        best_move = nil
+        board.each do |s|
+          if s != "X" && s != "O"
+            available_spaces << s
+          end
+        end
+        available_spaces.each do |as|
+          board[as.to_i] = @com
+          if game_is_over(board)
+            best_move = as.to_i
+            board[as.to_i] = as
+            return best_move
+          else
+            board[as.to_i] = @hum
+            if game_is_over(board)
+              best_move = as.to_i
+              board[as.to_i] = as
+              return best_move
+            else
+              board[as.to_i] = as
+            end
+          end
+        end
     end
+
     if best_move
       return best_move
     else
@@ -149,6 +176,7 @@ class Game
   def tie(b)
     b.all? { |s| s == "X" || s == "O" }
   end
+
 
 end
 
