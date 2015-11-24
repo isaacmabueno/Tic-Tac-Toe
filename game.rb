@@ -13,11 +13,20 @@ class Game
     puts "Type 1 to make the first move, 2 to go second"
     first_move
     until game_is_over(@board) || tie(@board)
-      get_human_spot
-      if !game_is_over(@board) && !tie(@board)
-        eval_board
+      if @turn == true
+          get_human_spot
+      else
+          eval_board
+          puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
       end
-      puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
+      if !game_is_over(@board) && !tie(@board)
+        if @turn == false
+            get_human_spot
+        else
+            eval_board
+            puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
+        end
+      end
     end
     puts "Game over"
   end
@@ -27,7 +36,7 @@ class Game
     until input
       input = gets.chomp.to_i
       if input == 1
-          @turn = true
+         @turn = true
       elsif input == 2
         @turn = false
       else
