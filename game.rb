@@ -9,8 +9,11 @@ class Game
   def start_game
     puts "Welcome to my Tic Tac Toe game"
     puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
+    puts "Please type your marker X or O (capital letter) and hit enter"
+    pick_marker
     puts "Type 1 to make the first move, 2 to go second"
     first_move
+    puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
     until game_is_over(@board) || tie(@board)
       if @turn == true
           puts "please select your spot"
@@ -30,6 +33,22 @@ class Game
       end
     end
     puts "Game over"
+  end
+  def pick_marker
+      input = nil
+      until input
+      input = gets.chomp.upcase
+      if input == "X"
+          @hum = "X"
+          @com =  "O"
+      elsif input == "O"
+          @hum = "O"
+          @com = "X"
+      else
+        puts "Please type your marker X or O (capital letter) and hit enter"
+        input = nil
+      end
+    end
   end
 
   def first_move
