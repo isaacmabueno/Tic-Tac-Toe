@@ -113,7 +113,7 @@ class Game
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
 
-    if @corner_turn == false && @turn ==false;
+    if @corner_turn == false && @turn == false;
         available_spaces = []
         best_move = nil
 
@@ -125,7 +125,7 @@ class Game
           end
         end
         @corner_turn = true
-        n = rand(0..available_spaces.count)
+        n = rand(0...available_spaces.count)
         return available_spaces[n].to_i
     elsif @turn == true && @corner_turn ==false;
       available_spaces = []
@@ -169,7 +169,9 @@ class Game
         end
         @corner_turn = true
         puts available_laterals
-        return available_laterals[rand(0..available_laterals.count)].to_i
+        n = available_laterals[rand(0...available_laterals.count)].to_i
+        puts n.to_s
+        return n
       end
     else
         available_spaces = []
@@ -186,6 +188,10 @@ class Game
             board[as.to_i] = as
             return best_move
           else
+              board[as.to_i] = as
+          end
+        end
+        available_spaces.each do |as|
             board[as.to_i] = @hum
             if game_is_over(board)
               best_move = as.to_i
@@ -194,7 +200,6 @@ class Game
             else
               board[as.to_i] = as
             end
-          end
         end
     end
 
