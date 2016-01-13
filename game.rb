@@ -113,9 +113,10 @@ class Game
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
 
-    if @corner_turn == false
+    if @corner_turn == false && @turn ==false;
         available_spaces = []
         best_move = nil
+
         board.each do |s|
           if s != "X" && s != "O"
               if ["0", "2", "6", "8"].include? s
@@ -126,6 +127,50 @@ class Game
         @corner_turn = true
         n = rand(0..available_spaces.count)
         return available_spaces[n].to_i
+    elsif @turn == true && @corner_turn ==false;
+      available_spaces = []
+      best_move = nil
+      board.each do |s|
+        if s != "X" && s != "O"
+          available_spaces << s
+        end
+      end
+      available_spaces.each do |as|
+        board[as.to_i] = @com
+        if game_is_over(board)
+          best_move = as.to_i
+          board[as.to_i] = as
+          return best_move
+        else
+          board[as.to_i] = @hum
+          if game_is_over(board)
+            best_move = as.to_i
+            board[as.to_i] = as
+            @corner_turn = true
+            return best_move
+          else
+            board[as.to_i] = as
+          end
+        end
+      end
+      if best_move == nil
+          puts "NIL"
+      else
+          puts best_move
+      end
+      if best_move == nil
+        available_laterals = []
+        board.each do |s|
+          if s != "X" && s != "O"
+              if ["1", "3", "5", "7"].include? s
+                available_laterals << s
+              end
+          end
+        end
+        @corner_turn = true
+        puts available_laterals
+        return available_laterals[rand(0..available_laterals.count)].to_i
+      end
     else
         available_spaces = []
         best_move = nil
