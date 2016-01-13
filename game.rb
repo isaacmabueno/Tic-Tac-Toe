@@ -2,8 +2,8 @@ class Game
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
     @corner_turn = false
-    @com = "X"
-    @hum = "O"
+    @computer = "X"
+    @human = "O"
     @turn = nil
   end
 
@@ -47,11 +47,11 @@ class Game
       until input
       input = gets.chomp.upcase
       if input == "X"
-          @hum = "X"
-          @com =  "O"
+          @human = "X"
+          @computer =  "O"
       elsif input == "O"
-          @hum = "O"
-          @com = "X"
+          @human = "O"
+          @computer = "X"
       else
         puts "Please type your marker X or O (capital letter) and hit enter"
         input = nil
@@ -86,7 +86,7 @@ class Game
           spot = spot.to_i
       end
       if @board[spot] != "X" && @board[spot] != "O" && @board[spot] != nil
-        @board[spot] = @hum
+        @board[spot] = @human
       else
         spot = nil
       end
@@ -98,11 +98,11 @@ class Game
     until spot
     if @board[4] == "4"
         spot = 4
-        @board[spot] = @com
+        @board[spot] = @computer
       else
-        spot = get_best_move(@board, @com)
+        spot = get_best_move(@board, @computer)
         if @board[spot] != "X" && @board[spot] != "O"
-          @board[spot] = @com
+          @board[spot] = @computer
         else
           spot = nil
         end
@@ -136,13 +136,13 @@ class Game
         end
       end
       available_spaces.each do |as|
-        board[as.to_i] = @com
+        board[as.to_i] = @computer
         if game_is_over(board)
           best_move = as.to_i
           board[as.to_i] = as
           return best_move
         else
-          board[as.to_i] = @hum
+          board[as.to_i] = @human
           if game_is_over(board)
             best_move = as.to_i
             board[as.to_i] = as
@@ -182,7 +182,7 @@ class Game
           end
         end
         available_spaces.each do |as|
-          board[as.to_i] = @com
+          board[as.to_i] = @computer
           if game_is_over(board)
             best_move = as.to_i
             board[as.to_i] = as
@@ -192,7 +192,7 @@ class Game
           end
         end
         available_spaces.each do |as|
-            board[as.to_i] = @hum
+            board[as.to_i] = @human
             if game_is_over(board)
               best_move = as.to_i
               board[as.to_i] = as
