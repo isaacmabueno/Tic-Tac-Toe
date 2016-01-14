@@ -53,7 +53,7 @@ class Game
           @human = "O"
           @computer = "X"
       else
-        puts "Please type your marker X or O (capital letter) and hit enter"
+        puts "|Sorry, that input was invalid| \nPlease type your marker X or O and hit enter"
         input = nil
       end
     end
@@ -68,7 +68,7 @@ class Game
       elsif input == 2
         @turn = false
       else
-        puts "Please choose 1 or 2"
+        puts "|Sorry, that input was invalid| \nType 1 to make the first move, 2 to go second"
         input = nil
       end
     end
