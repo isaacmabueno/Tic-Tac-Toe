@@ -28,7 +28,7 @@ class Game
         if @turn == false
             puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
 
-            puts "please select your spot"
+            puts "Please select your spot"
             get_human_spot
         else
             eval_board
@@ -80,7 +80,7 @@ class Game
       spot = gets.chomp
       if !@board.include? spot
          spot = nil
-         puts "Please enter valid input to make a move"
+         puts "|Sorry, that input was invalid| \nPlease select your spot"
          next
       else
           spot = spot.to_i
