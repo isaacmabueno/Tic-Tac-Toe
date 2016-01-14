@@ -4,10 +4,10 @@
 ![alt image] (http://i.imgur.com/Mv3CBpv.png)
 
 **HOW TO PLAY**
-1.Go to https://repl.it/languages/ruby
-2.Copy and paste code into text editor
-3.Click "Run"
-4.Play game!
+-1.Go to https://repl.it/languages/ruby
+-2.Copy and paste code into text editor
+-3.Click "Run"
+-4.Play game!
 ![alt image] (http://i.imgur.com/Mv3CBpv.png)
 ![alt image] (http://i.imgur.com/Sp8gJsz.png)
 ![alt image] (http://i.imgur.com/nhMr1B7.png)
