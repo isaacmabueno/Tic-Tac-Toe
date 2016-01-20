@@ -19,7 +19,7 @@ class Game
       if @turn == true
 
           puts "|_#{@board[0]}_|_#{@board[1]}_|_#{@board[2]}_|\n|_#{@board[3]}_|_#{@board[4]}_|_#{@board[5]}_|\n|_#{@board[6]}_|_#{@board[7]}_|_#{@board[8]}_|\n"
-          puts "please select your spot"
+          puts "Please select your spot"
           get_human_spot
       else
           eval_board
@@ -108,7 +108,7 @@ class Game
         end
       end
     end
-    puts "the computer placed on " + spot.to_s
+    puts "The computer placed on " + spot.to_s
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
