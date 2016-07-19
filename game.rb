@@ -154,7 +154,7 @@ class Game
         end
       end
       if best_move == nil
-          puts "NIL"
+          #puts "NIL"
       else
           puts best_move
       end
@@ -162,15 +162,15 @@ class Game
         available_laterals = []
         board.each do |s|
           if s != "X" && s != "O"
-              if ["1", "3", "5", "7"].include? s
+              if ["0", "2", "6", "8"].include? s
                 available_laterals << s
               end
           end
         end
         @corner_turn = true
-        puts available_laterals
+        # puts available_laterals
         n = available_laterals[rand(0...available_laterals.count)].to_i
-        puts n.to_s
+        # puts n.to_s
         return n
       end
     else
@@ -212,7 +212,6 @@ class Game
   end
 
   def game_is_over(b)
-
     [b[0], b[1], b[2]].uniq.length == 1 ||
     [b[3], b[4], b[5]].uniq.length == 1 ||
     [b[6], b[7], b[8]].uniq.length == 1 ||
@@ -226,7 +225,6 @@ class Game
   def tie(b)
     b.all? { |s| s == "X" || s == "O" }
   end
-
 
 end
 
